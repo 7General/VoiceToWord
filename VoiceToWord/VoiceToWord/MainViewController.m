@@ -13,6 +13,8 @@
 #import "IATConfig.h"
 #import "ISRDataHelper.h"
 
+#import "GZIMVoiceToWordHelper.h"
+
 
 
 
@@ -21,10 +23,13 @@
 // 录音文件名称
 #define recodWorld @"rec.wav"
 
-@interface MainViewController ()<IFlySpeechRecognizerDelegate,AVAudioRecorderDelegate>
+@interface MainViewController ()</*IFlySpeechRecognizerDelegate,*/AVAudioRecorderDelegate,GZIMVoiceToWordDelegate>
 
 /* 创建语音识别对象 */
-@property (nonatomic, strong)  IFlySpeechRecognizer* iflySpeechRecognizer;
+//@property (nonatomic, strong)  IFlySpeechRecognizer* iflySpeechRecognizer;
+
+
+
 
 @property (nonatomic, strong) NSString * result;
 @property (nonatomic, strong) UILabel * textLabel;
@@ -32,6 +37,8 @@
 
 @property (nonatomic, strong) AVAudioRecorder *recorder;
 @property (nonatomic, strong) NSString *recFilePath;
+
+@property (nonatomic, strong) UITextField * filename;
 
 @end
 
@@ -62,8 +69,13 @@
     self.textLabel = [[UILabel alloc] init];
     self.textLabel.backgroundColor = [UIColor greenColor];
     self.textLabel.numberOfLines = 0;
-    self.textLabel.frame = CGRectMake(100, 260, 300, 200);
+    self.textLabel.frame = CGRectMake(100, 260, 200, 200);
     [self.view addSubview:self.textLabel];
+    
+    self.filename = [[UITextField alloc] initWithFrame:CGRectMake(100, 500, 100, 30)];
+    self.filename.backgroundColor = [UIColor grayColor];
+    self.filename.text = @"123";
+    [self.view addSubview:self.filename];
     
 }
 
@@ -73,65 +85,78 @@
 
 // 开始识别
 - (void)startRec {
-    IATConfig *instance = [IATConfig sharedInstance];
-    // pcm和wav格式的音频
-    self.iflySpeechRecognizer = [IFlySpeechRecognizer sharedInstance];
-    [self.iflySpeechRecognizer setParameter:IFLY_AUDIO_SOURCE_STREAM forKey:@"audio_source"];
-    [self.iflySpeechRecognizer setParameter:instance.sampleRate forKey:[IFlySpeechConstant SAMPLE_RATE]];
-    self.iflySpeechRecognizer.delegate = self;
-    
-    self.showText = [NSMutableString new];
-    //启动识别服务
-    [self.iflySpeechRecognizer startListening];
-    //写入音频数据
-    NSString * path = [[NSBundle mainBundle] pathForResource:toWorld ofType:nil];
-    NSData *data = [NSData dataWithContentsOfFile:path];
-    [self.iflySpeechRecognizer writeAudio:data];
-    [self.iflySpeechRecognizer stopListening];
+//    IATConfig *instance = [IATConfig sharedInstance];
+//    // pcm和wav格式的音频
+//    self.iflySpeechRecognizer = [IFlySpeechRecognizer sharedInstance];
+//    [self.iflySpeechRecognizer setParameter:IFLY_AUDIO_SOURCE_STREAM forKey:@"audio_source"];
+//    [self.iflySpeechRecognizer setParameter:instance.sampleRate forKey:[IFlySpeechConstant SAMPLE_RATE]];
+//    self.iflySpeechRecognizer.delegate = self;
+//
+//    self.showText = [NSMutableString new];
+//    //启动识别服务
+//    [self.iflySpeechRecognizer startListening];
+//    //写入音频数据
+//    NSString * path = [[NSBundle mainBundle] pathForResource:toWorld ofType:nil];
+//    NSData *data = [NSData dataWithContentsOfFile:path];
+//    [self.iflySpeechRecognizer writeAudio:data];
+//    [self.iflySpeechRecognizer stopListening];
+    NSString * fileName = [NSString stringWithFormat:@"%@.wav",self.filename.text];
+    NSString * path = [[NSBundle mainBundle] pathForResource:fileName ofType:nil];
+    [[GZIMVoiceToWordHelper defaultMannager] gzimVoiceToWordWithPath:path];
+    [[GZIMVoiceToWordHelper defaultMannager] setDelegate:self];
 }
+
+- (void)GZIMonCompleted:(GZIMVoiceToWordHelper *)voiceHelper withResoultDesc:(NSString *)errorDesc {
+    NSLog(@"---描述：%@",errorDesc);
+}
+
+-(void)GZIMonCompleted:(GZIMVoiceToWordHelper *)voiceHelper forTranslationWord:(NSString *)voiceWord {
+    self.textLabel.text = voiceWord;
+}
+
 
 
 #pragma mark - ify
--(void)onCompleted:(IFlySpeechError *)errorCode {
-    NSLog(@"转换结果描述:%@",errorCode.errorDesc);
-}
-- (void)onResults:(NSArray *)results isLast:(BOOL)isLast {
-    NSMutableString *resultString = [[NSMutableString alloc] init];
-    NSDictionary *dic = results[0];
-    for (NSString *key in dic){
-        [resultString appendFormat:@"%@",key];
-    }
-    
-    if([IATConfig sharedInstance].isTranslate) {
-        NSDictionary *resultDic  = [NSJSONSerialization JSONObjectWithData:
-                                    [resultString dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:nil];
-        if(resultDic != nil){
-            NSDictionary *trans_result = [resultDic objectForKey:@"trans_result"];
-            if([[IATConfig sharedInstance].language isEqualToString:@"en_us"]){
-                NSString *dst = [trans_result objectForKey:@"dst"];
-                NSString * usString = [NSString stringWithFormat:@"%@\ndst:%@",resultString,dst];
-                NSLog(@"usString=%@",usString);
-                [self.showText appendString:usString];
-            } else {
-                
-            }
-            if([[IATConfig sharedInstance].language isEqualToString:@"zh_cn"]) {
-                NSString *src = [trans_result objectForKey:@"src"];
-                NSString * cnString = [NSString stringWithFormat:@"%@\nsrc:%@",resultString,src];
-                NSLog(@"cnString=%@",cnString);
-                [self.showText appendString:cnString];
-            }
-        }
-    } else {
-        NSString * valueString = [ISRDataHelper stringFromJson:resultString];
-        NSLog(@"valueString=%@",valueString);
-        [self.showText appendString:valueString];
-    }
-    
-    if (isLast) {
-        self.textLabel.text = self.showText;
-    }
-}
+//-(void)onCompleted:(IFlySpeechError *)errorCode {
+//    NSLog(@"转换结果描述:%@",errorCode.errorDesc);
+//}
+//- (void)onResults:(NSArray *)results isLast:(BOOL)isLast {
+//    NSMutableString *resultString = [[NSMutableString alloc] init];
+//    NSDictionary *dic = results[0];
+//    for (NSString *key in dic){
+//        [resultString appendFormat:@"%@",key];
+//    }
+//
+//    if([IATConfig sharedInstance].isTranslate) {
+//        NSDictionary *resultDic  = [NSJSONSerialization JSONObjectWithData:
+//                                    [resultString dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:nil];
+//        if(resultDic != nil){
+//            NSDictionary *trans_result = [resultDic objectForKey:@"trans_result"];
+//            if([[IATConfig sharedInstance].language isEqualToString:@"en_us"]){
+//                NSString *dst = [trans_result objectForKey:@"dst"];
+//                NSString * usString = [NSString stringWithFormat:@"%@\ndst:%@",resultString,dst];
+//                NSLog(@"usString=%@",usString);
+//                [self.showText appendString:usString];
+//            } else {
+//
+//            }
+//            if([[IATConfig sharedInstance].language isEqualToString:@"zh_cn"]) {
+//                NSString *src = [trans_result objectForKey:@"src"];
+//                NSString * cnString = [NSString stringWithFormat:@"%@\nsrc:%@",resultString,src];
+//                NSLog(@"cnString=%@",cnString);
+//                [self.showText appendString:cnString];
+//            }
+//        }
+//    } else {
+//        NSString * valueString = [ISRDataHelper stringFromJson:resultString];
+//        NSLog(@"valueString=%@",valueString);
+//        [self.showText appendString:valueString];
+//    }
+//
+//    if (isLast) {
+//        self.textLabel.text = self.showText;
+//    }
+//}
 
 
 
