@@ -10,6 +10,7 @@
 		2228ECE72180721F007AC734 /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2228ECE62180721F007AC734 /* iflyMSC.framework */; };
 		2228ECE92180728D007AC734 /* 123.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2228ECE82180728D007AC734 /* 123.wav */; };
 		2228ECEB21807386007AC734 /* 345.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2228ECEA21807386007AC734 /* 345.wav */; };
+		2228ECED21807563007AC734 /* 567.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2228ECEC21807563007AC734 /* 567.wav */; };
 		2231648A212E593900FA706E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22316489212E593900FA706E /* AppDelegate.m */; };
 		2231648D212E593900FA706E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2231648C212E593900FA706E /* ViewController.m */; };
 		22316490212E593900FA706E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2231648E212E593900FA706E /* Main.storyboard */; };
@@ -38,6 +39,7 @@
 		2228ECE62180721F007AC734 /* iflyMSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iflyMSC.framework; path = ../iflyMSC.framework; sourceTree = "<group>"; };
 		2228ECE82180728D007AC734 /* 123.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 123.wav; sourceTree = "<group>"; };
 		2228ECEA21807386007AC734 /* 345.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 345.wav; sourceTree = "<group>"; };
+		2228ECEC21807563007AC734 /* 567.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 567.wav; sourceTree = "<group>"; };
 		22316485212E593900FA706E /* VoiceToWord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VoiceToWord.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22316488212E593900FA706E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		22316489212E593900FA706E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				22F521B0218055F3007B1DAA /* rec.wav */,
 				2228ECE82180728D007AC734 /* 123.wav */,
 				2228ECEA21807386007AC734 /* 345.wav */,
+				2228ECEC21807563007AC734 /* 567.wav */,
 				22316487212E593900FA706E /* VoiceToWord */,
 				22316486212E593900FA706E /* Products */,
 				223164A3212E5E6700FA706E /* Frameworks */,
@@ -222,6 +225,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2228ECED21807563007AC734 /* 567.wav in Resources */,
 				22316495212E593900FA706E /* LaunchScreen.storyboard in Resources */,
 				22F521B1218055F3007B1DAA /* rec.wav in Resources */,
 				2228ECE92180728D007AC734 /* 123.wav in Resources */,

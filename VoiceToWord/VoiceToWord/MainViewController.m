@@ -53,10 +53,17 @@
     
     UIButton * startButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [startButton setTitle:@"开始录音" forState:UIControlStateNormal];
-    startButton.frame = CGRectMake(100, 100, 150, 50);
+    startButton.frame = CGRectMake(50, 100, 100, 50);
     startButton.backgroundColor = [UIColor grayColor];
     [startButton addTarget:self action:@selector(startRecord) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:startButton];
+    
+    UIButton * stopButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [stopButton setTitle:@"结束录音" forState:UIControlStateNormal];
+    stopButton.frame = CGRectMake(210, 100, 100, 50);
+    stopButton.backgroundColor = [UIColor grayColor];
+    [stopButton addTarget:self action:@selector(stopRecord) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:stopButton];
     
 
     UIButton * cancleButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -239,9 +246,9 @@
     [self.recorder prepareToRecord];
     [self.recorder record];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self stoprecode];
-    });
+}
+- (void)stopRecord {
+    [self stoprecode];
 }
 
 -(void)stoprecode {
