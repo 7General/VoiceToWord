@@ -26,6 +26,10 @@
 		223164B5212E5EB700FA706E /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 223164B4212E5EB700FA706E /* libc++.tbd */; };
 		223164B7212E5ECF00FA706E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 223164B6212E5ECF00FA706E /* QuartzCore.framework */; };
 		223164B9212E5ED800FA706E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 223164B8212E5ED800FA706E /* CoreGraphics.framework */; };
+		22316507212EAB2100FA706E /* ISRDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 22316504212EAB2000FA706E /* ISRDataHelper.m */; };
+		22316508212EAB2100FA706E /* IATConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 22316506212EAB2100FA706E /* IATConfig.m */; };
+		22F521B1218055F3007B1DAA /* rec.wav in Resources */ = {isa = PBXBuildFile; fileRef = 22F521B0218055F3007B1DAA /* rec.wav */; };
+		22F521B421806534007B1DAA /* GZIMVoiceToWord.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F521B321806534007B1DAA /* GZIMVoiceToWord.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +57,13 @@
 		223164B4212E5EB700FA706E /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		223164B6212E5ECF00FA706E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		223164B8212E5ED800FA706E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		22316503212EAB2000FA706E /* ISRDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISRDataHelper.h; sourceTree = "<group>"; };
+		22316504212EAB2000FA706E /* ISRDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISRDataHelper.m; sourceTree = "<group>"; };
+		22316505212EAB2000FA706E /* IATConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IATConfig.h; sourceTree = "<group>"; };
+		22316506212EAB2100FA706E /* IATConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IATConfig.m; sourceTree = "<group>"; };
+		22F521B0218055F3007B1DAA /* rec.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = rec.wav; sourceTree = "<group>"; };
+		22F521B221806534007B1DAA /* GZIMVoiceToWord.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GZIMVoiceToWord.h; sourceTree = "<group>"; };
+		22F521B321806534007B1DAA /* GZIMVoiceToWord.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GZIMVoiceToWord.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +92,11 @@
 		2231647C212E593900FA706E = {
 			isa = PBXGroup;
 			children = (
+				22F521B0218055F3007B1DAA /* rec.wav */,
+				22316505212EAB2000FA706E /* IATConfig.h */,
+				22316506212EAB2100FA706E /* IATConfig.m */,
+				22316503212EAB2000FA706E /* ISRDataHelper.h */,
+				22316504212EAB2000FA706E /* ISRDataHelper.m */,
 				22316487212E593900FA706E /* VoiceToWord */,
 				22316486212E593900FA706E /* Products */,
 				223164A3212E5E6700FA706E /* Frameworks */,
@@ -110,6 +126,8 @@
 				22316497212E593900FA706E /* main.m */,
 				2231649E212E59B600FA706E /* MainViewController.h */,
 				2231649F212E59B600FA706E /* MainViewController.m */,
+				22F521B221806534007B1DAA /* GZIMVoiceToWord.h */,
+				22F521B321806534007B1DAA /* GZIMVoiceToWord.m */,
 			);
 			path = VoiceToWord;
 			sourceTree = "<group>";
@@ -191,6 +209,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22316495212E593900FA706E /* LaunchScreen.storyboard in Resources */,
+				22F521B1218055F3007B1DAA /* rec.wav in Resources */,
 				22316492212E593900FA706E /* Assets.xcassets in Resources */,
 				22316490212E593900FA706E /* Main.storyboard in Resources */,
 			);
@@ -204,7 +223,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				2231648D212E593900FA706E /* ViewController.m in Sources */,
+				22F521B421806534007B1DAA /* GZIMVoiceToWord.m in Sources */,
 				22316498212E593900FA706E /* main.m in Sources */,
+				22316507212EAB2100FA706E /* ISRDataHelper.m in Sources */,
+				22316508212EAB2100FA706E /* IATConfig.m in Sources */,
 				2231648A212E593900FA706E /* AppDelegate.m in Sources */,
 				223164A0212E59B600FA706E /* MainViewController.m in Sources */,
 			);
@@ -350,6 +372,11 @@
 				INFOPLIST_FILE = VoiceToWord/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/VoiceConvert/opencore-amrnb",
+					"$(PROJECT_DIR)/VoiceConvert/opencore-amrwb",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.guazi.car;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -370,6 +397,11 @@
 				INFOPLIST_FILE = VoiceToWord/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/VoiceConvert/opencore-amrnb",
+					"$(PROJECT_DIR)/VoiceConvert/opencore-amrwb",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.guazi.car;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";

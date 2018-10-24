@@ -20,7 +20,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
-    
+    [IFlySetting setLogFile:LVL_NONE];
     [IFlySpeechUtility createUtility:@"appid=5b7e1b45"];
     
     MainViewController * main = [[MainViewController alloc] init];
